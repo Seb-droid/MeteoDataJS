@@ -1,0 +1,337 @@
+*, ::before, ::after {
+    /*box-sizing: border-box;*/
+    margin: 0;
+    padding: 0;
+}
+
+/* pour l'app meteo */
+
+.container {
+    width: 93%;
+    background: linear-gradient(45deg, #295275, #121d24);
+    /*display: grid;*/
+    /*grid-template: 100px 300px 100px 100px / repeat(8, 100px);*/
+    margin: 2%;
+    position: relative;
+    border: 6px solid #0d1424;
+    border-radius: 6px;
+    justify-content: center;
+
+}
+.app-meteo{
+    margin: 2%;
+    
+}
+.headgraph {
+    /* deb row / deb col / fin row / fin col */
+    /*grid-area: 1 / 1 / 2 / -1;*/
+    
+    font-size: 18px;
+    top: -6px;
+    left: -0;
+    width: 100%;
+    height: 7em;
+    border-top: 20px solid #0d1424;
+    border-radius: 5px;
+    position: relative;
+    text-align:center;
+}
+
+.bloc-logo-info {
+    /*grid-area: 2 / 1 / 3 / -1;*/ /* logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 25px solid #0d1424;
+    margin-bottom: 0%;;
+}
+.bloc-logo {
+    width: 40%;
+}
+.bloc-logo img {
+    width: 60%;
+    margin-right: 30%;
+}
+.bloc-info {
+    width: 55%;
+    font-size: 16px;
+}
+.bloc-info .temps {
+    font-size: 1.7em;
+}
+.bloc-info .temps::first-letter {
+    text-transform: capitalize;
+}
+.bloc-info .temperature {
+    font-size: 2.15em;
+}
+.bloc-info .localisation {
+    font-size: 1.2em;
+    word-wrap: break-word;
+}
+.bloc-info .localisation::first-letter {
+    text-transform: capitalize;
+}
+
+/*******************/
+/*******************/
+/*******************/
+
+
+        
+#myChart2, #myChart4{
+    margin-top: 7%;
+}
+.chart{
+    width: 85%;
+    justify-content: center;
+    align-items: center;
+    margin: 8% auto 0;
+    z-index:20;
+}
+.chartfooter{
+    width: 44vmin;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0;
+    z-index:20;
+    margin-bottom: 2%;
+}
+canvas{
+    margin-top: 0px;
+}
+
+/***     select    ****
+***/
+
+#myStationSelected:hover {
+    background-color: #0f242b;
+    color: rgb(255, 238, 238);
+    transition-duration: 200ms;
+}
+#myStationSelected{
+    width: 80%;
+    text-align-last: center; /*responsive*/
+    color: rgb(87, 179, 255);
+    background-color: transparent;
+    border: 3px solid #00eeff81;
+}
+select:hover {
+    background-color: #dcdfe0;
+    color: #000;
+    transition-duration: 200ms;
+}
+label{
+    margin-right: 0%;
+    font-size: 1.2em;
+    float: left;
+    color:rgb(0, 255, 128);
+}
+select {
+    color: rgb(87, 179, 255);
+    background: transparent;
+    width: 120px;/*5.2em; par defaut*/
+    height:50px; /*2em par defaut*/
+    font-size: 20px;
+    border:3px solid #00eeff81;
+    cursor:pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline:none;
+    background-image: none;
+}
+select::-ms-expand {
+    display:none;
+}
+.icon_arrow {
+    border-top:12px solid;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    position:relative;
+    right:27px;
+    top:1px;
+    pointer-events: none;
+    color: tomato;
+
+}
+
+#selectDiv{
+    top: -8px;
+    left: 0px;
+    width: 300px; /*250 px*/
+    height: 70px;
+    margin-top: 8%;
+    margin-bottom: 0%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 10000000;
+    /*border: 5px solid chartreuse;*/
+}
+div.selectD, div.selectH{
+    margin-top: 0%;
+    margin-bottom: 2%;
+}
+div.selectH{
+    margin-left: 0px;
+}
+
+/***    end select     ***/
+
+.city{
+    fill: #023dff;
+}
+
+h1, h2{
+    text-align:center;
+}
+.header {
+    font-size: 20px;
+    padding-top: 0;
+    width: 100%;
+    height: 5vh;
+    background: #010502;
+    position: fixed;
+    z-index: 500;
+    box-shadow: 0 2px 4px rgba(6, 14, 5, 0.3);
+    margin-right: 0%;
+    margin-left: 0%;
+    top: 0%;
+    border-top: 3px solid #06f585;
+    border-bottom: 3px solid #06f585;
+}
+.vitualText{
+    fill:rgb(252, 254, 255);
+    font-size: 1.5em;
+}
+
+
+#svg {
+    display: block;
+    margin: auto;
+    margin: 2% auto 0;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    color: black;
+    width: 21em;
+    height: 3em; /*la hauteur s'adapte au texte*/
+    padding: 3px;
+    font: 1.5vh sans-serif;
+    background: grey;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+div.tooltipCity {
+    position: absolute;
+    text-align: center;
+    color: black;
+    width: 15em;
+    height: 6.2em;
+    padding: 1px;
+    font: 1.8vh sans-serif;
+    background: rgb(35, 201, 212);
+    border: 0px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.department{
+    fill:rgb(18, 167, 58);
+    fill-opacity: .9;
+}
+footer{
+    text-align: center; font-family: consolas;
+    border: 1px solid; border-color:aquamarine; 
+    padding-top: 0.1em;
+    width: 100%;
+    height: 3.5%;
+    background: #010502;
+    display: block;
+    position: fixed;
+    z-index: 500;
+    box-shadow: 0 2px 4px rgba(6, 14, 5, 0.3);
+    margin-right: 0%;
+    margin-left: 0%;
+    bottom: 0%;
+    line-height: 80%;
+}
+
+/* grid */
+#map, #map3{
+    width: 92vmin;
+    margin: 1% 1% 1% 1%;
+    background-color:rgb(11, 34, 49);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: #0c344b solid 5px;
+    border-radius: 3px;;
+}
+
+#map.myChart{
+    width: 100%;
+}
+#map.myChart2{
+    width: 100%;
+}
+
+body{
+    margin-top: 8%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background:rgb(6, 21, 31);
+    color: #f1f1f1;
+}
+
+.panel, .panel2{
+    /*border: 8px solid black;*/
+    background-color: rgb(18, 42, 53);
+    background-image: 
+    linear-gradient(
+        90deg, #000000, transparent 7px), 
+        linear-gradient(
+            180deg, #000000, transparent 7px), 
+            linear-gradient(
+                270deg, #000000, transparent 7px), 
+                  linear-gradient(
+                      0deg, #000000,transparent 7px); 
+                      background-size: 7px 100%, 100% 7px, 7px 100% , 100% 7px;
+
+    background-position: 0 0, 0 0, 100% 0, 0 100%; background-repeat: no-repeat; 
+    width: 92vmin; /*défini la taille de tous les panels*/
+    margin: 1% 1% 1% 1%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.panel2{
+    margin: 1% 1% 10% 1%; /*bas*/
+}
+
+@media screen and (max-width: 1000px){ /*980 pour les derniers android*/
+
+        #map, #map3{
+            margin-left: 0%;
+            flex-direction: initial; /**/
+            width: 92vmin; /*défini la taille de tous les panels*/
+        }
+        body{
+            flex-direction: column;
+            background-size: cover;
+        }
+        .panel, .panel2{
+            width: 93vmin; /*défini la taille de tous les panels*/
+
+            flex-direction: column;
+            margin-top: 8%;
+            margin-bottom: 5%;
+        }
+        .header{
+            height: 8.5vh;
+
+        }
+}

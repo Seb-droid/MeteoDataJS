@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>D3 Meteo</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="js/chart.js"></script>
+
+  <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <!--<script src="js/tooltip.js" type="text/javascript"></script>-->
+  
+  <script src="js/table.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+  
+  <link rel="stylesheet" href="style.css">
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    
+</head>
+
+<body>
+    
+    <header class="header">
+        <h1>Meteo Dashboard</h1>
+    </header>
+
+    <div id="selectDiv">
+        
+        <div class="selectD">
+            
+                <label>JRS</label><br/>
+                <select id="selectDay" onChange="selectDay();">
+                    <option value="0" selected="true">Jour 1</option>
+                    <option value="1">Jour 2</option>
+                    <option value="2">Jour 3</option>
+                    <option value="3">Jour 4</option>
+                    <option value="4">Jour 5</option>
+                    <option value="5">Jour 6</option>
+                    <option value="6">Jour 7</option>
+                    <option value="7">Jour 8</option>
+                    <option value="8">Jour 9</option>
+                    <option value="9">Jour 10</option>
+                    <option value="10">Jour 11</option>
+                    <option value="11">Jour 12</option>
+                    <option value="12">Jour 13</option>
+                    <option value="13">Jour 14</option>
+                    <option value="14">Jour 15</option>
+                    <option value="15">Jour 16</option>
+                    <option value="16">Jour 17</option>
+                    <option value="17">Jour 18</option>
+                    <option value="18">Jour 19</option>
+                    <option value="19">Jour 20</option>
+                    <option value="20">Jour 21</option>
+                    <option value="21">Jour 22</option>
+                    <option value="22">Jour 23</option>
+                    <option value="23">Jour 24</option>
+                    <option value="24">Jour 25</option>
+                    <option value="25">Jour 26</option>
+                    <option value="26">Jour 27</option>
+                    <option value="27">Jour 28</option>
+                </select>
+                <img class="icon_arrow"></img>
+                
+            
+            
+        </div>
+        
+        
+    </div>
+    <div class="panel">
+        <div id="map">
+                    
+            <div class="chart">
+
+                            
+                <canvas id="myChart" ></canvas>
+                <canvas id="myChart2" ></canvas>
+
+            </div>
+
+            <script src="js/drawChart.js"> </script>
+
+            
+        </div>
+
+        <div id="map">
+            <h2 id="titleday"></h2>
+            <h2>Temp° et Pluie sur toute la France </h2>
+            <div class="selectH">   
+            
+                <label style="margin-top:34px;">HEURES:</label><br/>
+                <select id="selectHour" onChange="selectHour()">
+                    <option value="8" selected="true">sur 24h</option>
+                    <option value="0">0h00</option>
+                    <option value="3">3h00</option>
+                    <option value="6">6h00</option>
+                    <option value="9">9h00</option>
+                    <option value="12">12h00</option>
+                    <option value="15">15h00</option>
+                    <option value="18">18h00</option>
+                    <option value="21">21h00</option>
+                </select>
+                <img class="icon_arrow"></img>
+            
+            </div>
+                <svg class="mapsvg" id="svg"
+                width="100%" height="100%" 
+                viewBox="0 0 540 540" preserveAspectRatio="xMinYMin">
+                
+                </svg>
+
+        </div>
+</div>
+    <div class="panel2">
+        <!--app meteo-->
+        <div id="map3">
+            <div id="app-meteo">
+                <div class="container">
+
+                    <!--<div class="overlay-icone-chargement">
+                        <img src="ressources/chargement/circles.svg" alt="logo chargement">
+                    </div>-->
+                    <div class="headgraph">
+                        <h1>Station meteo</h1>
+                            <div>
+
+                                <select id="myStationSelected"> <!-----------------!-!------------------->
+
+                                </select>
+                                <img style="right:40px" class="icon_arrow"></img>
+
+                            </div>
+                    
+                    </div>
+                    
+                        
+                    <div class="bloc-logo-info">
+        
+                        <div class="bloc-logo">
+                            <img id="logo-meteo" src="./ressources/jour/04d.svg" alt="logo du temps qu'il fait" class="logo-meteo">
+                        </div>
+            
+                        <div class="bloc-info">
+                            <p id="temps" class="temps">--</p>
+                            <p id="temperature" class="temperature">--</p>
+                            <p id="localisation" class="localisation">--</p>
+                        </div>
+                
+                </div>
+                
+            </div>
+        
+        </div>
+    </div>
+    
+    
+    <div id="map">
+
+        <div class="chartfooter">
+                   
+            <canvas id="myChart3" width="50%"></canvas>
+        
+            <canvas id="myChart4" width="50%"></canvas>
+        </div>
+    </div>
+
+    
+</div>
+        <footer>
+        ® - ce site est soumis aux mentions légales et aux cgu - <br/>
+        Édité par Hiding name on stream
+    </footer>
+
+
+<script>
+    // ceci est utile pour rafraichir les select
+    refreshSelectDay();
+    refreshSelectHour();
+
+    function refreshSelectDay(){
+        var optionDay = document.getElementById("selectDay").options;
+        optionDay[0].selected = true;
+    }
+    function refreshSelectHour(){
+        document.getElementById("selectHour").selectedIndex = '0';
+    }
+
+
+</script>
+
+
+<!--///////////////////////////////////////////////////////////////////
+/////// drawmap.js
+//////////////////////////////////////////////////////////////////-->
+<script src="js/drawmap.js"></script>
+
+
+<!--///////////////////////////////////////////////////////////////////
+/////// map.js
+//////////////////////////////////////////////////////////////////-->
+<script src="js/map.js" type="text/javascript">
+</script>
+
+
+<script type="text/javascript">	
+
+
+///////////////////////////////////////////////////////////////////
+/////// à mettre dans un script
+//////////////////////////////////////////////////////////////////
+
+
+
+
+
+</script>
+<div class="tooltip" style="opacity: 0; left: 0px; top: 0px;"></div>
+<div id="grammalecte_menu_main_button_shadow_host" style="width: 0px; height: 0px;"></div></body><script src="moz-extension://6753b57b-d3fc-4982-8586-fb3198352d70/content_scripts/api.js"></script>
+
+
+
+
+
+</body>
+
+
+</html>
