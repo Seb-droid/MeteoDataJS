@@ -1,2 +1,2 @@
 # MeteoDataJS
-a meteo scrap which get next informations for weather etcetera
+a meteo app which get next informations for weather etcetera
