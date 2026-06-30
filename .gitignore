@@ -4,6 +4,8 @@ style.css
 styles/*
 test*.html
 
-js/{calcul_global.js,chart.js,drawchat*.js}
+js/calcul_global.js
+js/drawchat*.js
+js/chart.js
 
 .env
