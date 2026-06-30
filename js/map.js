@@ -142,7 +142,7 @@ deps.selectAll("path")
         div.transition()
             .duration(200)
             .style("opacity", .9);
-        div.html("Departement : " + d.properties.NOM_DEPT + "<br/>"
+        div.html("Departement : " + d.properties.NOM_DEPT + ` (${d.properties.CODE_DEPT})` + "<br/>"
               +  "Region : " + d.properties.NOM_REGION)
             .style("left", (d3.event.pageX - 120) + "px")
             .style("top", (d3.event.pageY - 60) + "px")

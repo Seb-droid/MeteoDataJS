@@ -1,0 +1,9 @@
+index-backup.html
+index-bckp*.html
+style.css
+test*.html
+styles/*
+
+js/{calcul_global.js,chart.js,drawchat*.js}
+
+.env

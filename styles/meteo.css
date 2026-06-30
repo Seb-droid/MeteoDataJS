@@ -1,0 +1,60 @@
+/* footer {
+    display: flex;
+    justify-content: center;
+} */
+
+#svg {
+    display: block;
+    margin: auto;
+    margin: 2% auto 0;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    color: black;
+    width: 21em;
+    height: 3em;
+    /*la hauteur s'adapte au texte*/
+    padding: 3px;
+    font: 1.5vh sans-serif;
+    background: grey;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+div.tooltipCity {
+    position: absolute;
+    text-align: center;
+    color: black;
+    width: 15em;
+    height: 6.2em;
+    padding: 1px;
+    font: 1.8vh sans-serif;
+    background: rgb(68, 125, 248);
+    /* background: rgb(35, 201, 212); */
+    border: 0px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.department {
+    fill: rgb(9, 124, 40);
+    fill-opacity: .9;
+}
+
+.city {
+    fill: #023dff;
+}
+
+/* .virtualTxt {
+    fill: rgb(230, 228, 141);
+    font-size: 1.5em;
+} */
+/* 
+ @media (width <= 420px){
+    #divmain{
+        margin-top: 40px;
+    }
+ } */

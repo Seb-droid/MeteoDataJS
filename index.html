@@ -1,228 +1,382 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
+<!-- PROMPT IA
+     Pas de problème pour le mode Thénardier, l'avantage du code, c'est que ça ne me coûte pas un centime en huile de coude. En tant que dev confirmé, je te propose une base propre, moderne et entièrement responsive (avec Tailwind CSS via CDN pour éviter de s'embêter avec une config).
+
+    J'ai inclus des mocks visuels (via Chart.js pour les graphiques et Lucide Icons pour les icônes) afin que ton tableau de bord ressemble immédiatement à quelque chose de concret.
+
+    Voici le fichier index.html clé en main :
+    
+    -->
+
 <head>
     <title>D3 Meteo</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="js/chart.js"></script>
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script> -->
+    <script src="./js/d3jsv4_13_0-aucasou"></script>
+    <script src="./js/d3sjv5_13_0-aucasou"></script>
+    <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Météo Expert</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script> <!-- pour les icones -->
+    <link rel="stylesheet" href="styles/meteo.css">
 
-  <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-  <!--<script src="js/tooltip.js" type="text/javascript"></script>-->
-  
-  <script src="js/table.js" type="text/javascript"></script>
-  <script src="js/main.js" type="text/javascript"></script>
-  
-  <link rel="stylesheet" href="style.css">
-
-
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    
 </head>
 
-<body>
-    
-    <header class="header">
-        <h1>Meteo Dashboard</h1>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+
+    <header class="fixed overflow overflow-hidden bg-slate-800 border-b border-slate-700 p-3 shadow-md w-screen md:w-screen">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center gap-2 text-sky-400">
+                <i data-lucide="cloud-sun"></i> <a class="refresh border-b border-slate-500" href="./index.html"> 🗘</a>
+                MétéoDashboard
+            </h1>
+            <!-- <span class="text-xs bg-slate-700 px-3 py-1 rounded-full text-slate-400">Mode Gratuiciel (Thén)</span> -->
+
+            <aside class="flex justify-around p-1 pl-8 lg:mr-10 mr-1 lg:col-span-1 bg-slate-800 rounded-xl border border-indigo-100 border-slate-400 shadow-sm ml-1 h-[1%] w-max md:w-fit">
+                <!-- <aside class="lg:col-span-1 bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-sm h-fit"> -->
+                <label for="day-select" class="block text-sm font-medium text-slate-400 mb-2">
+                    Choisir la prévision :
+                </label>
+                <select id="day-select" class="w-full bg-slate-950 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-sky-500 focus:outline-none position-fixed">
+                    <option value="1" selected>Jour 1</option>
+                    <option value="2">Jour 2 (Demain)</option>
+                    <script>
+                        for (let i = 3; i <= 28; i++) {
+                            document.write(`<option value="${i}">Jour ${i}</option>`);
+                        }
+                    </script>
+                </select>
+
+                <div class="mt-6 text-xs text-slate-500 space-y-2">
+                    <!-- <p>💡 Modifier ce sélecteur mettra à jour le Composant 4 et les données locales.</p> -->
+                </div>
+            </aside>
+        </div>
     </header>
+    <!-- AJOUTER FLEX-COL UNE FOIS DEBUG FINIS -->
+    <main class="lg:ml-[25rem] lg:mr-[25rem] flex flex-col justify-center md:p-12 p-2">
+        <!-- <main class="container mx-auto p-16 lg:p-2 grid grid-cols-2 lg:grid-cols-4 gap-6"> -->
 
-    <div id="selectDiv">
-        
-        <div class="selectD">
-            
-                <label>JRS</label><br/>
-                <select id="selectDay" onChange="selectDay();">
-                    <option value="0" selected="true">Jour 1</option>
-                    <option value="1">Jour 2</option>
-                    <option value="2">Jour 3</option>
-                    <option value="3">Jour 4</option>
-                    <option value="4">Jour 5</option>
-                    <option value="5">Jour 6</option>
-                    <option value="6">Jour 7</option>
-                    <option value="7">Jour 8</option>
-                    <option value="8">Jour 9</option>
-                    <option value="9">Jour 10</option>
-                    <option value="10">Jour 11</option>
-                    <option value="11">Jour 12</option>
-                    <option value="12">Jour 13</option>
-                    <option value="13">Jour 14</option>
-                    <option value="14">Jour 15</option>
-                    <option value="15">Jour 16</option>
-                    <option value="16">Jour 17</option>
-                    <option value="17">Jour 18</option>
-                    <option value="18">Jour 19</option>
-                    <option value="19">Jour 20</option>
-                    <option value="20">Jour 21</option>
-                    <option value="21">Jour 22</option>
-                    <option value="22">Jour 23</option>
-                    <option value="23">Jour 24</option>
-                    <option value="24">Jour 25</option>
-                    <option value="25">Jour 26</option>
-                    <option value="26">Jour 27</option>
-                    <option value="27">Jour 28</option>
-                </select>
-                <img class="icon_arrow"></img>
-                
-            
-            
-        </div>
-        
-        
-    </div>
-    <div class="panel">
-        <div id="map">
-                    
-            <div class="chart">
+        <!-- <aside class="lg:col-span-1 bg-slate-800 p-4 rounded-xl border border-indigo-400 border-slate-200 shadow-sm h-fit w-26 md:w-26 left-1 fixed"> -->
+        <!-- <aside class="lg:col-span-1 bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-sm h-fit"> -->
+        <!-- <label for="day-select" class="block text-sm font-medium text-slate-400 mb-2"> -->
+        <!-- Choisir la prévision : -->
+        <!-- </label> -->
+        <!-- <select id="day-select" -->
+        <!-- class="w-full bg-slate-950 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-sky-500 focus:outline-none position-fixed"> -->
+        <!-- <option value="1" selected>Jour 1</option> -->
+        <!-- <option value="2">Jour 2 (Demain)</option> -->
+        <!-- <script> -->
+        <!-- // for (let i = 3; i <= 28; i++) {
+                        // document.write(`<option value="${i}">Jour ${i}</option>`);
+                    // }
+                // </script> -->
+        <!-- </select> -->
+        <!-- <div class="mt-6 text-xs text-slate-500 space-y-2"> -->
+        <!-- <p>💡 Modifier ce sélecteur mettra à jour le Composant 4 et les données locales.</p> -->
+        <!-- </div> -->
+        <!-- </aside> -->
+        <!-- FLEX ITEMS-START ajouté !!!! -->
+        <div id="divmain" class="mb-16 mt-30 md:mt-20 sm:mt-30 lg:mt-20 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 gap-10 md:gap-8">
+            <!-- <div class="mt-16 md:mt-16 sm:mt-16 lg:mt-32 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 gap-6 ml-26 w-[175%] md:w-[126%] flex flex-col "> -->
+            <!-- <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6"> -->
 
-                            
-                <canvas id="myChart" ></canvas>
-                <canvas id="myChart2" ></canvas>
-
+            <!-- COMPOSANT 1 tendances globales -->
+            <div class="md:col-span-2 bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                    <!-- Composant 1 : Tendances globales (28 jours) -->
+                    Tendances globales (28 jours)
+                </h2>
+                <div class="h-64 w-full">
+                    <canvas id="chart28Days"></canvas>
+                </div>
             </div>
 
-            <script src="js/drawChart.js"> </script>
-
-            
-        </div>
-
-        <div id="map">
-            <h2 id="titleday"></h2>
-            <h2>Temp° et Pluie sur toute la France </h2>
-            <div class="selectH">   
-            
-                <label style="margin-top:34px;">HEURES:</label><br/>
-                <select id="selectHour" onChange="selectHour()">
-                    <option value="8" selected="true">sur 24h</option>
-                    <option value="0">0h00</option>
-                    <option value="3">3h00</option>
-                    <option value="6">6h00</option>
-                    <option value="9">9h00</option>
-                    <option value="12">12h00</option>
-                    <option value="15">15h00</option>
-                    <option value="18">18h00</option>
-                    <option value="21">21h00</option>
-                </select>
-                <img class="icon_arrow"></img>
-            
+            <!-- COMPOSANT 4 Détails de la journée -->
+            <div class="md:col-span-2 bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-2 flex justify-between">
+                    <span>Détails de la journée</span>
+                    <!-- <span>Composant 4 : Détails de la journée</span> -->
+                    <span id="selected-day-badge" class="text-sky-400 lowercase italic font-normal">Jour 1</span>
+                </h2>
+                <div class="h-64 w-full">
+                    <canvas id="chartSingleDay"></canvas>
+                </div>
             </div>
-                <svg class="mapsvg" id="svg"
-                width="100%" height="100%" 
-                viewBox="0 0 540 540" preserveAspectRatio="xMinYMin">
-                
-                </svg>
 
-        </div>
-</div>
-    <div class="panel2">
-        <!--app meteo-->
-        <div id="map3">
-            <div id="app-meteo">
-                <div class="container">
+            <!-- COMPOSANT 3 Station au choix -->
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between">
+                <!-- <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between"> -->
+                <div>
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">
+                        <!-- Composant 3 : Station Locale -->
+                        Station Locale
+                        ☀️⛅
+                    </h2>
+                    <label class="block text-xs text-slate-400 mb-1">Sélectionner la station :</label>
+                    <select id="station-select"
+                        class="w-full bg-slate-950 border border-slate-600 rounded p-2 text-sm text-white mb-6">
+                        <!-- <option value="0">Paris-Montsouris</option>
+                        <option value="1">Brest-Guipavas</option>
+                        <option value="2">Nice-Côte d'Azur</option> -->
+                    </select>
 
-                    <!--<div class="overlay-icone-chargement">
-                        <img src="ressources/chargement/circles.svg" alt="logo chargement">
-                    </div>-->
-                    <div class="headgraph">
-                        <h1>Station meteo</h1>
-                            <div>
+                    <div class="flex items-center justify-around bg-slate-950 p-4 rounded-lg border border-slate-700">
+                        <div id="weather-icon-container" class="text-sky-400">
+                            <!-- <i data-lucide="sun" class="w-16 h-16 dynamic-icon"></i> -->
+                            <img id="logo-sun-cloud" src="./ressources/jour/01d.svg" alt="logo du temps qu'il fait"
+                                class="lg:w-40 md:6">
+                            <!-- class="w-[128px]"> -->
+                        </div>
+                        <div class="text-clip">
+                            <p id="station-temp" class="lg:w-fit md:w-15 p-fixed text-3xl font-extrabold text-white">
+                                24°C</p>
+                            <p id="station-condition" class="lg:w-fit md:w-15 text-xs text-slate-400">Nuageux</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                <select id="myStationSelected"> <!-----------------!-!------------------->
+            <!-- COMPOSANT 2 Carte De FRANCE -->
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400">
+                            Température et pluie sur toute la France
+                            <!-- Composant 2 : Carte de France -->
+                            <select id="hour-select"
+                                class="bg-slate-950 border border-slate-600 rounded px-2 py-1 text-xs text-white">
+                                <script>
+                                    document.write(`<option value=${8}>sur ${24}h00</option>`);
+                                    for (let h = 0; h < 24; h += 3) {
+                                        hour = h < 10 ? '0' + h : h;
+                                        document.write(`<option value="${hour}">${hour}:00</option>`);
+                                    }
+                                </script>
+                            </select>
+                        </h2>
 
-                                </select>
-                                <img style="right:40px" class="icon_arrow"></img>
-
-                            </div>
-                    
                     </div>
                     
-                        
-                    <div class="bloc-logo-info">
-        
-                        <div class="bloc-logo">
-                            <img id="logo-meteo" src="./ressources/jour/04d.svg" alt="logo du temps qu'il fait" class="logo-meteo">
+
+                    <div>
+                        <!-- à garder  -->
+                        <!-- <div class="w-full z-0 bg-slate-950 border border-slate-700 rounded-lg aspect-square flex flex-col items-center justify-center relative overflow-hidden"> -->
+
+                        <div id="z-10 text-center p-4">
+                            <h2 id="titleday" class="text-sky-400 lowercase italic font-normal"></h2>
+                            
+                            <p class="text-xs text-slate-400 mb-[-20px]">
+                                        <!-- width="20em" height="20em" -->
+                                <!-- viewBox="0 0 540 540" width="100%" height="100%"  -->
+                                <svg class="mapsvg" class="w-screen" id="svg" 
+                                        Initial viewBox= "0 0 540 540"
+                                        Zoom X2=     "centre - newWidth/2  = (100/2) - (50/2) = 25"
+                                        Zoom X2=     "(100/2) - (25/2) = 37.5"
+                                        preserveAspectRatio="xMinYMin"
+                                width="100%" height="100%"  
+                                        >
+                                    <!-- preserveAspectRatio="xMinYMin"> -->
+                                </svg>
+                            </p>
+                            <!-- ajoutés -->
+                            <script src="js/map.js" type="text/javascript"></script>
+                            <script src="js/main.js" type="text/javascript"></script>
+                            <script type="module" src="js/fillmap.js"></script>
+                            <!-- <script type="module" src="js/drawChart.js"></script> -->
                         </div>
-            
-                        <div class="bloc-info">
-                            <p id="temps" class="temps">--</p>
-                            <p id="temperature" class="temperature">--</p>
-                            <p id="localisation" class="localisation">--</p>
-                        </div>
-                
+                    </div>
                 </div>
-                
             </div>
-        
-        </div>
-    </div>
-    
-    
-    <div id="map">
 
-        <div class="chartfooter">
-                   
-            <canvas id="myChart3" width="50%"></canvas>
-        
-            <canvas id="myChart4" width="50%"></canvas>
-        </div>
-    </div>
+            <!-- COMPOSANT 5 vigilances -->
+            <div class="md:col-span-2 bg-slate-800 lg:p-4 p-6 rounded-xl border border-slate-700">
+                <h2 class="text-sm mt-[-10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                    <!-- <i data-lucide="triangle-alert" class="text-amber-500"></i> Composant 5 : Vigilances Nationales -->
+                    <i data-lucide="triangle-alert" class="text-amber-500"></i> Vigilances Nationales
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400">Orages</p>
+                            <p class="font-bold text-amber-400">Jaune</p>
+                        </div>
+                        <i data-lucide="cloud-lightning" class="text-amber-400"></i>
+                    </div>
+                    <div class="bg-slate-900 p-2 rounded-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400">Grêle</p>
+                            <p class="font-bold text-slate-400">Aucune</p>
+                        </div>
+                        <i data-lucide="cloud-hail"></i>
+                    </div>
+                    <div
+                        class="bg-orange-500/10 border border-orange-500/30 p-2 rounded-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400">Canicule</p>
+                            <p class="font-bold text-orange-400">Orange</p>
+                        </div>
+                        <i data-lucide="thermometer-sun" class="text-orange-400"></i>
+                    </div>
+                    <div class="bg-slate-900 p-2 rounded-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400">Neige</p>
+                            <p class="font-bold text-slate-400">Aucune</p>
+                        </div>
+                        <i data-lucide="snowflake"></i>
+                    </div>
+                </div>
+            </div>
 
-    
-</div>
-        <footer>
-        ® - ce site est soumis aux mentions légales et aux cgu - <br/>
-        Édité par Hiding name on stream
+        </div>
+    </main>
+
+    <footer class="b-0 bg-slate-800 border-b border-slate-700 p-4 shadow-md w-screen md:w-screen">
+        <div class="flex justify-center items-center b-0">
+            <p>® - ce site est soumis aux mentions légales et aux <b><u><a class="underline hover:decoration-blue-500"
+                            href="./cgu.html">conditions générales d'utilisations</a></u></b> -
+                <!--  Édité par IA -->
+            </p>
+        </div>
+
     </footer>
 
+    <script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
 
-<script>
-    // ceci est utile pour rafraichir les select
-    refreshSelectDay();
-    refreshSelectHour();
+        // --- COMPOSANT 1 : Configuration Graphique 28 jours ---
+        const ctx28 = document.getElementById('chart28Days').getContext('2d');
+        // TEST
+        // let ctx28H = document.getElementById('chart28Days').offsetHeight;
 
-    function refreshSelectDay(){
-        var optionDay = document.getElementById("selectDay").options;
-        optionDay[0].selected = true;
-    }
-    function refreshSelectHour(){
-        document.getElementById("selectHour").selectedIndex = '0';
-    }
+        const labels28 = Array.from({ length: 28 }, (_, i) => `J${i + 1}`);
+        var blueredBG2 = ctx28.createLinearGradient(0, 160, 0, 180); // x0,y0,x1,y1
+        blueredBG2.addColorStop(0, "rgb(255,64,0,1)");
+        blueredBG2.addColorStop(0.9, "rgb(0,160,160,1)");
+        blueredBG2.addColorStop(1, "rgb(0,220,255,1)");
 
+        // console.log("ctx28.innerHeight ↓↓")
+        // console.log(document.getElementById('chart28Days').offsetHeight)
+        new Chart(ctx28, {
+            // height: "50%",
+            type: 'line',
+            data: {
+                labels: labels28,
+                datasets: [
+                    // { label: 'Temp (°C)', data: labels28.map(() => Math.floor(Math.random() * 15) + 15), borderColor: '#f43f5e', tension: 0.3 },
+                    { label: 'Temp (°C)', data: labels28.map(() => Math.floor(Math.random() * 15) + 12), borderColor: blueredBG2, tension: 0.3 },
+                    { label: 'Vent (km/h)', data: labels28.map(() => Math.floor(Math.random() * 50)), borderColor: '#38ad28', tension: 0.3 },
+                    { label: 'Pluie (mm)', data: labels28.map(() => Math.floor(Math.random() * 10)), backgroundColor: '#60a5fa', type: 'bar' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, /*aspectRatio: 1.65,*/ plugins: { legend: { labels: { color: '#94a3b8' } } } },
+            // canvas:{parentNode:{style:{width : '30%'}}}
+        });
 
-</script>
+        // --- COMPOSANT 4 : Configuration Graphique Jour Simple ---
+        const ctxSingle = document.getElementById('chartSingleDay').getContext('2d');
+        const hoursLabels = Array.from({ length: 8 }, (_, i) => `${i * 3}h`);
+        var purpleviolet = ctx28.createLinearGradient(0, 190, 0, 200); // x0,y0,x1,y1
+        purpleviolet.addColorStop(0, "rgb(160,64,128,1)");
+        purpleviolet.addColorStop(0.5, "rgb(160,64,160,1)");
+        purpleviolet.addColorStop(1, "rgb(200,64,255,1)");
+        var blueyellow = ctx28.createLinearGradient(0, 160, 0, 220); // x0,y0,x1,y1
+        blueyellow.addColorStop(0, "rgb(0,4,210,1)");
+        blueyellow.addColorStop(0.8, "rgb(0,4,210,1)");
+        blueyellow.addColorStop(1, "rgb(160,160,0,1)");
+        let max = 0;
 
+        let singleDayChart = new Chart(ctxSingle, {
+            type: 'line',
+            data: {
+                labels: hoursLabels,
+                datasets: [
+                    { label: 'Temp (°C)', data: [15, 17, 22, 26, 24, 20, 18, 16], yAxisID: "unit", borderColor: blueredBG2, tension: 0.5 },
+                    // { label: 'Temp (°C)', data: [15, 17, 22, 25, 24, 20, 18, 16], borderColor: '#f43f5e', tension: 0.4 },
 
-<!--///////////////////////////////////////////////////////////////////
-/////// drawmap.js
-//////////////////////////////////////////////////////////////////-->
-<script src="js/drawmap.js"></script>
+                    { label: 'Indice UV', data: [0, 1, 4, 7, 6, 2, 0, 0], yAxisID: "unit", borderColor: purpleviolet, tension: 0.5 },
+                    // { label: 'Indice UV', data: [0, 1, 4, 7, 6, 2, 0, 0], borderColor: '#a855f7', tension: 0.4 }
 
+                    { label: 'Humidité', data: [12 * 3 - Math.random() * 2, 10 * 3 - Math.random() * 6, 5 * 3, 1 * 3 - Math.random() * 1, 3 * 3, 7 * 3 - Math.random() * 4, 9 * 3 - Math.random() * 4, 11 * 3 - Math.random() * 4], yAxisID: "pourcent", borderColor: blueyellow, tension: 0.5 },
+                    // { label: 'Humidité', data: [90, 17, 22, 26, 24, 20, 18, 76], yAxisID:"pourcent", borderColor: blueyellow, tension: 0.4 }
+                ]
+            },
+            options: {
+                scales: {
+                    pourcent: { min: 0, max: 90, position: "right", title: { display: true, text: '% Hum', color: 'rgb(100,100,254,1)' } },
+                    unit: { max: 50, position: "left", title: { display: true, text: 'T°  |  IndiceUV', color: 'rgb(254,100,100,1)' } }
+                },
+                responsive: true, maintainAspectRatio: false, plugins: {
+                    legend: {
+                        labels: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
 
-<!--///////////////////////////////////////////////////////////////////
-/////// map.js
-//////////////////////////////////////////////////////////////////-->
-<script src="js/map.js" type="text/javascript">
-</script>
+        // Interaction Selecteur de jour -> Met à jour le titre du composant 4 (simulation)
+        document.getElementById('day-select').addEventListener('change', function (e) {
+            updateSingleDayChart(e)
+        });
 
+        document.getElementById('station-select').addEventListener('change', function (e) {
+            updateSingleDayChart(e)
+        })
 
-<script type="text/javascript">	
+        document.getElementById('hour-select').addEventListener('change', function (e) {
+            updateSingleDayChart(e)
+        })
 
+        /**
+         * @argument e : argument invité pour l'event
+          *  
+        **/
+        function updateSingleDayChart(e) {
+            document.getElementById('selected-day-badge').innerText = `Jour ${e.target.value}`;
+            // Simulation de mise à jour des données
+            for (let labl of singleDayChart.data.datasets) {
+                labl.label == 'Humidité' // si label humidité calcul en fonction des températures, sinon algorithme classique
+                    ? labl.data = singleDayChart.data.datasets[0].data.map((temper) => Math.floor(Math.random() * -40) + (48 - (temper + 5)) + 12)
+                    : labl.data = labl.data.map(() => Math.floor(Math.random() * 25) + 5);
+            };
+            // for(let labl of singleDayChart.data.datasets){ labl.label == 'Humidité' ? labl.data = labl.data.map(() => Math.floor(Math.random() * 35) + 12) : labl.data = labl.data.map(() => Math.floor(Math.random() * 15) + 15) };
+            singleDayChart.update();
+            // selectDay(e); // fillmap.js
+        }
+        // --- COMPOSANT 3 : Changement dynamique de la station (Icone SVG) ---
+        const stationsData = {
+            paris: { temp: "22°C", cond: "Éclaircies", icon: "cloud-sun" },
+            brest: { temp: "16°C", cond: "Pluvieux", icon: "cloud-rain" },
+            nice: { temp: "29°C", cond: "Grand Soleil", icon: "sun" }
+        };
 
-///////////////////////////////////////////////////////////////////
-/////// à mettre dans un script
-//////////////////////////////////////////////////////////////////
+        document.getElementById('station-select').addEventListener('change', function (e) {
+            const data = stationsData[e.target.value];
+            // document.getElementById('station-temp').innerText = data.temp;
+            // document.getElementById('station-condition').innerText = data.cond;
 
-
-
-
-
-</script>
-<div class="tooltip" style="opacity: 0; left: 0px; top: 0px;"></div>
-<div id="grammalecte_menu_main_button_shadow_host" style="width: 0px; height: 0px;"></div></body><script src="moz-extension://6753b57b-d3fc-4982-8586-fb3198352d70/content_scripts/api.js"></script>
-
-
-
-
-
+            // Remplacement propre de l'icône SVG via Lucide
+            // const container = document.getElementById('weather-icon-container');
+            // container.innerHTML = `<i data-lucide="${data.icon}" class="w-16 h-16"></i>`;
+            // lucide.createIcons(); // Ré-instanciation des icônes injectées
+        });
+    </script>
 </body>
+<!-- 
+    Ce qui est inclus :
 
+    - Layout moderne : Design sombre (Slate-900) ultra-tendance pour les dashboards techniques.
+
+    - Interactif sans backend : Le sélecteur de gauche modifie dynamiquement le titre et regénère des données aléatoires pour le graphique journalier (Composant 4).
+
+    - Changement d'icône SVG : Le sélecteur de station (Composant 3) remplace à la volée le tag et ré-exécute le moteur d'icônes pour passer d'un soleil à un nuage de pluie.
+
+    - Graphiques avancés : Mix de barres (pluie) et lignes (températures) prêt à recevoir de vraies données d'API.
+-->
 
 </html>
