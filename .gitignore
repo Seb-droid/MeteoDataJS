@@ -1,8 +1,8 @@
 index-backup.html
 index-bckp*.html
 style.css
-test*.html
 styles/*
+test*.html
 
 js/{calcul_global.js,chart.js,drawchat*.js}
 
