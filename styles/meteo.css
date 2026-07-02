@@ -58,3 +58,20 @@ div.tooltipCity {
         margin-top: 40px;
     }
  } */
+
+@keyframes blink {
+    25% { opacity: 1; }
+    35% { opacity: 0; }
+    75% { opacity: 0; }
+    85% { opacity: 1; }
+}
+
+.element-clignotant {
+    animation-name: blink;
+    animation-duration: 1s; /* Durée d'un cycle complet */
+    animation-iteration-count: infinite; /* Répétition infinie */
+    animation-timing-function: ease-in-out; /* Transition douce */
+}
+a {
+    text-decoration: none !important;
+}

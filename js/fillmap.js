@@ -72,8 +72,8 @@ document.getElementById('hour-select').addEventListener('change', function (e) {
 function selectHour(e) {
     hour = document.getElementById("hour-select").value;
 
-    hourtitle = hour == 8 ? " sur 24 heures" : " à " + hour + " h";
-    document.getElementById("titleday").innerHTML = "Jour " + (day) + " : " + hourtitle;
+    hourtitle = hour == 8 ? " sur 24 heures" : " à " + hour  + "<a class=\"element-clignotant\">:</a>00 h";
+    document.getElementById("titleday").innerHTML = "Jour " + (day) + " " + hourtitle;
 
     //alert(hour);
     //erase();
@@ -476,10 +476,11 @@ function drawChart(datach) {
     let monselect = d3.select("#station-select");
     
     monselect.append("option")
-        .text("Nice") // option par defaut
+        .text("...") // option par defaut
         .attr("value", function (d) {
             return 0;
         })
+        // .attr("default-selected", 1) //
         .attr("selected", true); //
 
     // options de toute les stations
@@ -494,7 +495,9 @@ function drawChart(datach) {
         })
         .attr("id", function (d) {
             return "station";
-        });
+        })
+        .attr("class", "text-xs font-arial truncate")
+        ;
 
     document.getElementById('station-select').addEventListener('change', function (e) {
         let iconSunCloudSta = change_icone_condition_meteo();

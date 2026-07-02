@@ -31,14 +31,18 @@
     <header class="fixed overflow overflow-hidden bg-slate-800 border-b border-slate-700 p-3 shadow-md w-screen md:w-screen">
         <div class="flex justify-between items-center">
             <h1 class="text-xl font-bold flex items-center gap-2 text-sky-400">
-                <i data-lucide="cloud-sun"></i> <a class="refresh border-b border-slate-500" href="./index.html"> 🗘</a>
-                MétéoDashboard
+                <i data-lucide="cloud-sun"></i> 
+                <a class="refresh" href="./index.html"> 
+                    <!-- 🗘 -->
+                    MétéoDashboard
+                </a>
             </h1>
             <!-- <span class="text-xs bg-slate-700 px-3 py-1 rounded-full text-slate-400">Mode Gratuiciel (Thén)</span> -->
 
             <aside class="flex justify-around p-1 pl-2 lg:mr-10 mr-1 lg:col-span-1 bg-slate-800 rounded-xl border border-indigo-100 border-slate-400 shadow-sm ml-5 h-[1%] w-42 md:w-60">
                 <!-- <aside class="lg:col-span-1 bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-sm h-fit"> -->
                 <label for="day-select" class="block text-sm font-medium text-slate-400 mb-2">
+                    <!-- Prévisions pour : -->
                     Choisir la prévision :
                 </label>
                 <select id="day-select" class="w-full bg-slate-950 border border-slate-600 rounded-lg p-2 text-white focus:ring-2 focus:ring-sky-500 focus:outline-none position-fixed">
@@ -46,7 +50,7 @@
                     <option value="2">Jour 2 (Demain)</option>
                     <script>
                         for (let i = 3; i <= 28; i++) {
-                            document.write(`<option value="${i}">Jour ${i}</option>`);
+                            document.write(`<option class="truncate" value="${i}">Jour ${i}</option>`);
                         }
                     </script>
                 </select>
@@ -58,7 +62,7 @@
         </div>
     </header>
     <!-- AJOUTER FLEX-COL UNE FOIS DEBUG FINIS -->
-    <main class="lg:ml-[20rem] lg:mr-[20rem] flex flex-col justify-center md:p-12 p-2">
+    <main class="2xl:ml-[30rem] 2xl:mr-[30rem] lg:ml-[10rem] lg:mr-[10rem] md:ml-[5rem] md:mr-[5rem] flex flex-col justify-center md:p-12 p-2">
         <!-- <main class="container mx-auto p-16 lg:p-2 grid grid-cols-2 lg:grid-cols-4 gap-6"> -->
 
         <!-- <aside class="lg:col-span-1 bg-slate-800 p-4 rounded-xl border border-indigo-400 border-slate-200 shadow-sm h-fit w-26 md:w-26 left-1 fixed"> -->
@@ -115,11 +119,10 @@
                     <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">
                         <!-- Composant 3 : Station Locale -->
                         Station Locale
-                        ☀️⛅
+                        <span>☀️⛅</span>
                     </h2>
-                    <label class="block text-xs text-slate-400 mb-1">Sélectionner la station :</label>
-                    <select id="station-select"
-                        class="w-full bg-slate-950 border border-slate-600 rounded p-2 text-sm text-white mb-6">
+                    <label aria-label="station-select" class="block text-xs text-slate-400 mb-1">Sélectionner la station :</label>
+                    <select id="station-select" class="w-[50%] bg-slate-950 border border-slate-600 rounded p-2 text-sm text-white mb-6">
                         <!-- <option value="0">Paris-Montsouris</option>
                         <option value="1">Brest-Guipavas</option>
                         <option value="2">Nice-Côte d'Azur</option> -->
@@ -142,23 +145,22 @@
             </div>
 
             <!-- COMPOSANT 2 Carte De FRANCE -->
-            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col justify-between">
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between">
                 <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400">
+                    <div class="flex justify-between grid grid-flow-col items-center mb-1">
+                        <h2 class="rows-span-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
                             Température et pluie sur toute la France
-                            <!-- Composant 2 : Carte de France -->
-                            <select id="hour-select"
-                                class="bg-slate-950 border border-slate-600 rounded px-2 py-1 text-xs text-white">
-                                <script>
-                                    document.write(`<option value=${8}>sur ${24}h00</option>`);
-                                    for (let h = 0; h < 24; h += 3) {
-                                        hour = h < 10 ? '0' + h : h;
-                                        document.write(`<option value="${hour}">${hour}:00</option>`);
-                                    }
-                                </script>
-                            </select>
                         </h2>
+                        <select id="hour-select" class="ml-2 rows-span-1 w-full bg-slate-950 border border-slate-600 rounded p-2 text-md text-white font-arial ">
+                            <script>
+                                document.write(`<option value=${8}>sur ${24}h00</option>`);
+                                for (let h = 0; h < 24; h += 3) {
+                                    hour = h < 10 ? '0' + h : h;
+                                    document.write(`<option value="${hour}">${hour}:00</option>`);
+                                }
+                                </script>
+                        </select>
+                        
 
                     </div>
                     
